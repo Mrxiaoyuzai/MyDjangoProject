@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <Name>DjangoWebProject2</Name>
+    <RootNamespace>DjangoWebProject2</RootNamespace>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>eb1e1861-b6d1-42c2-a2d7-53875657736e</ProjectGuid>
+    <ProjectHome>
+    </ProjectHome>
+    <ProjectTypeGuids>{5F0BE9CA-D677-4A4D-8806-6076C0FAAD37};{349c5851-65df-11da-9384-00065b846f21};{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <StartupFile>manage.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <WebBrowserUrl>http://localhost</WebBrowserUrl>
+    <LaunchProvider>Django launcher</LaunchProvider>
+    <DjangoSettingsModule>DjangoWebProject2.settings</DjangoSettingsModule>
+    <OutputPath>.</OutputPath>
+    <SuppressCollectPythonCloudServiceFiles>true</SuppressCollectPythonCloudServiceFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="app\forms.py" />
+    <Compile Include="app\models.py" />
+    <Compile Include="app\tests.py" />
+    <Compile Include="app\views.py" />
+    <Compile Include="app\__init__.py" />
+    <Compile Include="app\migrations\__init__.py" />
+    <Compile Include="manage.py" />
+    <Compile Include="DjangoWebProject2\__init__.py" />
+    <Compile Include="DjangoWebProject2\settings.py" />
+    <Compile Include="DjangoWebProject2\urls.py" />
+    <Compile Include="DjangoWebProject2\wsgi.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\" />
+    <Folder Include="app\migrations\" />
+    <Folder Include="app\static\" />
+    <Folder Include="app\static\app\" />
+    <Folder Include="app\static\app\content\" />
+    <Folder Include="app\static\app\fonts\" />
+    <Folder Include="app\static\app\scripts\" />
+    <Folder Include="app\static\app\scripts\locale\" />
+    <Folder Include="app\templates\" />
+    <Folder Include="app\templates\app\" />
+    <Folder Include="bin\" />
+    <Folder Include="DjangoWebProject2\" />
+    <Folder Include="E:\Linde\Project\OverDueRemind\DjangoWebProject2\DjangoWebProject2\DjangoWebProject2\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FolderProfile.pubxml" />
+    <Content Include="app\static\app\content\bootstrap-table.css" />
+    <Content Include="app\static\app\content\bootstrap-table.min.css" />
+    <Content Include="app\static\app\content\bootstrap-theme.css" />
+    <Content Include="app\static\app\content\bootstrap-theme.css.map" />
+    <Content Include="app\static\app\content\bootstrap-theme.min.css" />
+    <Content Include="app\static\app\content\bootstrap-theme.min.css.map" />
+    <Content Include="app\static\app\content\bootstrap.css.map" />
+    <Content Include="app\static\app\content\bootstrap.min.css.map" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="app\static\app\scripts\bootstrap-table-locale-all.js" />
+    <Content Include="app\static\app\scripts\bootstrap-table-locale-all.min.js" />
+    <Content Include="app\static\app\scripts\bootstrap-table-zh-CN.js" />
+    <Content Include="app\static\app\scripts\bootstrap-table.js" />
+    <Content Include="app\static\app\scripts\jquery-3.2.1.js" />
+    <Content Include="app\static\app\scripts\jquery-3.2.1.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-af-ZA.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-af-ZA.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ar-SA.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ar-SA.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ca-ES.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ca-ES.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-cs-CZ.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-cs-CZ.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-da-DK.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-da-DK.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-de-DE.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-de-DE.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-el-GR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-el-GR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-en-US.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-en-US.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-AR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-AR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-CL.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-CL.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-CR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-CR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-ES.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-ES.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-MX.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-MX.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-NI.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-NI.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-SP.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-es-SP.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-et-EE.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-et-EE.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-fa-IR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-fa-IR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-fr-BE.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-fr-BE.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-fr-FR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-fr-FR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-he-IL.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-he-IL.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-hr-HR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-hr-HR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-hu-HU.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-hu-HU.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-id-ID.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-id-ID.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-it-IT.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-it-IT.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ja-JP.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ja-JP.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ka-GE.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ka-GE.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ko-KR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ko-KR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ms-MY.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ms-MY.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-nb-NO.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-nb-NO.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-nl-NL.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-nl-NL.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-pl-PL.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-pl-PL.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-pt-BR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-pt-BR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-pt-PT.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-pt-PT.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ro-RO.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ro-RO.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ru-RU.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ru-RU.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-sk-SK.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-sk-SK.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-sv-SE.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-sv-SE.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-th-TH.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-th-TH.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-tr-TR.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-tr-TR.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-uk-UA.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-uk-UA.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ur-PK.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-ur-PK.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-uz-Latn-UZ.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-uz-Latn-UZ.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-vi-VN.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-vi-VN.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-zh-CN.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-zh-CN.min.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-zh-TW.js" />
+    <Content Include="app\static\app\scripts\locale\bootstrap-table-zh-TW.min.js" />
+    <Content Include="app\static\app\scripts\npm.js" />
+    <Content Include="app\templates\app\MessageDetail.html" />
+    <Content Include="app\templates\app\List.html" />
+    <Content Include="bin\ConfigureCloudService.ps1" />
+    <Content Include="bin\ps.cmd" />
+    <Content Include="bin\readme.html">
+      <SubType>WebBrowser</SubType>
+    </Content>
+    <Content Include="bin\web.config" />
+    <Content Include="requirements.txt" />
+    <Content Include="db.sqlite3" />
+    <Content Include="app\static\app\content\bootstrap.css" />
+    <Content Include="app\static\app\content\bootstrap.min.css" />
+    <Content Include="app\static\app\content\site.css" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="app\static\app\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="app\static\app\scripts\bootstrap.js" />
+    <Content Include="app\static\app\scripts\bootstrap.min.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.min.js" />
+    <Content Include="app\static\app\scripts\jquery-1.10.2.min.map" />
+    <Content Include="app\static\app\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.min.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="app\static\app\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="app\static\app\scripts\modernizr-2.6.2.js" />
+    <Content Include="app\static\app\scripts\respond.js" />
+    <Content Include="app\static\app\scripts\respond.min.js" />
+    <Content Include="app\static\app\scripts\_references.js" />
+    <Content Include="app\templates\app\about.html" />
+    <Content Include="app\templates\app\contact.html" />
+    <Content Include="app\templates\app\index.html" />
+    <Content Include="app\templates\app\layout.html" />
+    <Content Include="app\templates\app\login.html" />
+    <Content Include="app\templates\app\loginpartial.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="readme.html">
+      <SubType>WebBrowser</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Interpreter Include="env\">
+      <Id>env</Id>
+      <Version>3.6</Version>
+      <Description>env (Python 3.6 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|ContinuumAnalytics|Anaconda36-64" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.Django.targets" />
+  <!-- Specify pre- and post-build commands in the BeforeBuild and 
+       AfterBuild targets below. -->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <AutoAssignPort>True</AutoAssignPort>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

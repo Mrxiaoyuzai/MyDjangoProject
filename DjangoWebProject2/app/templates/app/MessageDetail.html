@@ -1,0 +1,68 @@
+﻿{% extends "app/layout.html" %}
+
+{% block headscript %}
+<script type="text/javascript">
+    function OK() {
+        if (window.opener != undefined) {
+            //for chrome
+            opener.RefreshList(11);
+            window.opener.returnValue = 11;
+        }
+        else {
+            window.returnValue = 22;
+        }
+
+        window.close();
+    }
+
+    function getModel(id) {
+        var post_data = {
+            "id": id
+        };
+        alert(id);
+        $.ajax({
+            url: '/model_upload',
+            type: "POST",
+            data: post_data,
+            success: function (data) {
+                data = JSON.parse(data);
+                alert(data["result"]);
+
+            }
+        });
+    }
+
+</script>
+{% endblock %}
+
+{% block content %}
+
+<h2>{{ title }}.</h2>
+<h3>{{ message }}</h3>
+{{ mid }}
+{{ mtitle }}
+
+
+<input type="hidden" id="hdmID" value="" />
+<p>Use this area to provide additional information.</p>
+    <table style=" border:solid">
+        <tr>
+            <td>
+                Title:标题
+            </td>
+            <td>
+                <input type="text" id="txtTitle" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button"  id="btn" value="BtnTest" onclick="fun_get(2)"/>
+            </td>
+        </tr>
+         <tr>
+            <td>
+                <input type="button"  id="btnReturn" value="BtnTest" onclick="OK()"/>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
