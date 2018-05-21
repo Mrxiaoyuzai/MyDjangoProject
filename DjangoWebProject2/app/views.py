@@ -13,6 +13,17 @@ from app import models
 from django.core import serializers
 import time
 
+
+def outer(func):
+    def wrap(request,*arg,**kwargs):
+        username = request.session.get('username',None) #request.session.get('username',None)
+        if username:
+            ret = func(request,*arg,**kwargs)
+            return ret
+        else:
+            return redirect('/error')
+    return wrap
+
 def doAction(request):
     if request.method == "GET":
         print("it's a test")     #用于测试
@@ -74,17 +85,33 @@ def list(request):
             'title':'list',
             'year':datetime.now().year,
         })
+def getUserSelect():
+    return (('test1','test11'),('test2','test22'))
 
 def messageDetail(request):
-    return render(request,
-        'app/MessageDetail.html',
-        {
-            'title':'Detail',
-            'message':'Detail Page.',
-            'year':datetime.now().year,
-            'mid':'1',
-            'mtitle':'mytesttitle',
-        })
+    
+    context = {}
+    mid = int(request.GET.get("id",0))
+    mmodel = None
+    if(mid > 0):
+        mmodel = models.MailMessage.objects.get(id=mid)
+    
+    if request.method == "POST":
+        obj = forms.MailMessageForm(request.POST,instance = mmodel)
+        if obj.is_valid():
+            current_time = datetime.now()
+            temp = obj.save(commit=False) #commit暂时获取一个数据库对象，对其他字段进行赋值
+            temp.createtime = current_time
+            temp.creator = 'system'
+            obj.save()
+            return HttpResponse(json.dumps({"result":"ok"}))
+    else:    
+        obj = forms.MailMessageForm(instance = mmodel)
+
+    obj.fields['usertitle'].choices = (('test1','test11'),('test2','test22'))
+    context['mailemessage_form'] = obj
+    return render(request,'app/MessageDetail.html',context)
+   
 
 def contact(request):
     """Renders the contact page."""
