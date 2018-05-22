@@ -57,7 +57,7 @@
     <Folder Include="app\templates\app\" />
     <Folder Include="bin\" />
     <Folder Include="DjangoWebProject2\" />
-    <Folder Include="E:\Linde\Project\OverDueRemind\DjangoWebProject2\DjangoWebProject2\DjangoWebProject2\" />
+    <Folder Include="C:\Users\cn4062d\source\repos\MyDjangoProject\DjangoWebProject2\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FolderProfile.pubxml" />
