@@ -1,4 +1,4 @@
-#!E:\Linde\Project\OverDueRemind\DjangoWebProject2\DjangoWebProject2\env\Scripts\python.exe
+#!C:\Users\cn4062d\source\repos\MyDjangoProject\DjangoWebProject2\env\Scripts\python.exe
 from django.core import management
 
 if __name__ == "__main__":

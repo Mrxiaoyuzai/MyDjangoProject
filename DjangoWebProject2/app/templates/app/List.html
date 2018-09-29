@@ -142,15 +142,16 @@
         } else {
             var requestids = "";
             $.each(a, function (n, value) {
-                requestids += value.ID + "|";
+                requestids += value.id + "|";
             });
             if (confirm("是否删除选中的数据?")) {
                 $.ajax({
                     dataType: "text",
                     data: { "action": "delInfo", "checkedRequestID": requestids },
-                    type: "post",
+                    type: "get",
                     url: "doAction",
                     success: function (data) {
+                        var obj = eval("(" + data + ")");
                         alert('删除成功');
                         search();
                     },

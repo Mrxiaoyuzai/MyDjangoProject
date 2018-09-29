@@ -1,3 +1,13 @@
+# settings.py
+import os
+## Default settings
+## Shared settings between development and production
+
+##env_dist = os.environ # environ是在os.py中定义的一个dict environ = {}
+# 打印所有环境变量，遍历字典
+##for key in env_dist:
+##    print (key + ' : ' + env_dist[key])
+##print (os.environ.get('DJANGO_PRODUCTION_SETTINGS', None))
 """
 Django settings for DjangoWebProject2 project.
 
@@ -74,68 +84,24 @@ SESSION_COOKIE_HTTPONLY = True                           # 是否Session的cooki
 SESSION_COOKIE_AGE = 1209600                             # Session的cookie失效日期（2周）（默认）
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False                  # 是否关闭浏览器使得Session过期（默认）
 SESSION_SAVE_EVERY_REQUEST = False                       # 是否每次请求都保存Session，默认修改之后才保存（默认）
-# Database
-#'ENGINE': 'django.db.backends.sqlite3',
-                                  #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-# https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {
-   'default': {
-       #数据库引擎设置
-         'ENGINE': 'sql_server.pyodbc',
-        #要连接的数据库名
-         'NAME': 'django',
-        #数据库用户名
-         'USER': 'sa',
-        #数据库密码
-         'PASSWORD': 'cxl112233',
-        #数据库主机地址
-         'HOST': '127.0.0.1',
-        #数据库端口号，默认可以不写
-         'PORT': '',
-        #选项，这个要先在操作系统上完成ODBC的连接创建，并连接成功，注意10.0这个地方，要和自己的ODBC版本一致
-          'OPTIONS': {
-              'driver':'SQL Server Native Client 10.0',
-        #使用MARS (multiple active result sets)，支持异步
-              'MARS_Connection': True,
-              }
-    }
-}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
-AUTH_PASSWORD_VALIDATORS = [{
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },]
-
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.9/topics/i18n/
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_L10N = True
-
-USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_URL = '/static/'
+STATIC_URL = '/OverDueRemind/static/'
 
-
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+PROJECT_DIR=os.path.dirname(__file__)
+STATICFILES_DIRS = (os.path.join(PROJECT_DIR,'static/'),)
+
+if os.environ.get('SERVER_SOFTWARE', None):
+    from .uat_settings import *
+else:
+    from .dev_settings import *
+
+
+
+
 
 

@@ -35,14 +35,23 @@
     <Compile Include="app\forms.py" />
     <Compile Include="app\models.py" />
     <Compile Include="app\tests.py" />
+    <Compile Include="app\appurls.py" />
     <Compile Include="app\views.py" />
     <Compile Include="app\__init__.py" />
     <Compile Include="app\migrations\__init__.py" />
+    <Compile Include="DjangoWebProject2\dev_settings.py" />
+    <Compile Include="DjangoWebProject2\uat_settings.py" />
+    <Compile Include="DjangoWebProject2\pro_settings.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="manage.py" />
     <Compile Include="DjangoWebProject2\__init__.py" />
     <Compile Include="DjangoWebProject2\settings.py" />
     <Compile Include="DjangoWebProject2\urls.py" />
     <Compile Include="DjangoWebProject2\wsgi.py" />
+    <Compile Include="MyTest.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\" />
@@ -169,12 +178,6 @@
     <Content Include="app\static\app\scripts\npm.js" />
     <Content Include="app\templates\app\MessageDetail.html" />
     <Content Include="app\templates\app\List.html" />
-    <Content Include="bin\ConfigureCloudService.ps1" />
-    <Content Include="bin\ps.cmd" />
-    <Content Include="bin\readme.html">
-      <SubType>WebBrowser</SubType>
-    </Content>
-    <Content Include="bin\web.config" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
     <Content Include="app\static\app\content\bootstrap.css" />

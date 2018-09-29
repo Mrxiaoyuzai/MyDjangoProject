@@ -12,17 +12,22 @@ import json
 from app import models
 from django.core import serializers
 import time
+from django.http import HttpResponseRedirect
 
-
-def outer(func):
-    def wrap(request,*arg,**kwargs):
-        username = request.session.get('username',None) #request.session.get('username',None)
+def checkUser(func):
+    def returned_wrapper(request,*arg,**kwargs):
+        ret = func(request,*arg,**kwargs)
+        return ret
+        username =request.COOKIES.get('username',None) #request.session.get('username',None)
         if username:
             ret = func(request,*arg,**kwargs)
             return ret
         else:
-            return redirect('/error')
-    return wrap
+            #return HttpResponseRedirect('http://webapps.linde-xiamen.com.cn/VerifyIdentity2Java/SkipPage.aspx?myurl=https://www.cnblogs.com/shenh/p/8028081.html')
+            return HttpResponseRedirect('about')
+    return returned_wrapper
+
+
 
 def doAction(request):
     if request.method == "GET":
@@ -45,10 +50,11 @@ def doAction(request):
             json_str = json_str.rstrip(',')
             json_str+=']'
             return HttpResponse((json_str))
-        elif action == "getModel":
-             id = request.GET.get("id")
-             message_model = models.MailMessage.objects.all().order_by("-createtime")
-       
+        elif action == "delInfo":
+            ids = request.GET.get("checkedRequestID").split('|')
+            ids = filter(None, ids)
+            mmodel = models.MailMessage.objects.get(id__in=ids).delete()
+            return HttpResponse(json.dumps({"result":"ok"}))
        
         #message_list_json = serializers.serialize("json", message_list)
         #return HttpResponse(message_list_json)
@@ -75,7 +81,7 @@ def home(request):
             'title':'Home Page My Test',
             'year':datetime.now().year,
         })
-
+@checkUser
 def list(request):
     """Renders the home page."""
     assert isinstance(request, HttpRequest)    
@@ -88,6 +94,7 @@ def list(request):
 def getUserSelect():
     return (('test1','test11'),('test2','test22'))
 
+@checkUser
 def messageDetail(request):
     
     context = {}
@@ -130,7 +137,7 @@ def about(request):
     return render(request,
         'app/about.html',
         {
-            'title':'About111',
+            'title':'About',
             'message':'Your application description page.',
             'year':datetime.now().year,
         })
