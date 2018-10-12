@@ -39,7 +39,8 @@ class MailMessageForm(ModelForm):
             'enddate': Fwidgets.TextInput(attrs={'class': 'form-control'}),
             'sendtime': Fwidgets.TextInput(attrs={'class': 'form-control'}),
             'remark': Fwidgets.Textarea(attrs={'class': 'form-control'}),  
-            
+            'useremail':Fwidgets.HiddenInput(),
+            'usertitle':Fwidgets.HiddenInput(),
             #'username':Fwidgets.HiddenInput(),
         }
         field_classes = {  # 定义字段的类是什么
@@ -47,8 +48,9 @@ class MailMessageForm(ModelForm):
               #'enddate': Ffields.DateField,
                 #'sendtime': Ffields.DateField,
         }
-        fields = ['type','username', 'title', 'supplier', 'message','message','startdate', 'enddate','sendtime','remark']  # 该表单包含的字段
+        fields = ['type','username', 'title', 'supplier', 'message','message','startdate', 'enddate','sendtime','remark','useremail','usertitle']  # 该表单包含的字段
     username = forms.ChoiceField(label=u'负责人',widget=Fwidgets.Select(attrs={'class': 'form-control'}))
+   
     def __init__(self,*args,**kwargs):
         super(MailMessageForm,self).__init__(*args,**kwargs)
         self.fields['username'].choices = (('112', '--请选择--'),)

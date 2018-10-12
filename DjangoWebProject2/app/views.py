@@ -139,6 +139,9 @@ def doAction(request):
             if  obj.is_valid():
                 current_time = datetime.now()
                 temp = obj.save(commit=False) #commit暂时获取一个数据库对象，对其他字段进行赋值
+                uinfo=getUserInfo(temp.username)[0][0]
+                temp.usertitle=uinfo.FullName
+                temp.useremail=uinfo.Email
                 if(mid == 0):
                     temp.createtime = current_time
                     temp.creator = getCurrentUserName(request)
