@@ -40,12 +40,13 @@
 
             var url = window.location.href;
             $.ajax({
-                type: "POST",
-                url: url,
+                dataType: "text",                
+                type: "get",
+                url: "doAction", 
                 data: $("#Form1").serialize(), // serializes the form's elements.
                 // 如果表单提交成功
                 success: function (data) {
-                    alert(data); // 显示django的response的内容
+                    //alert(data); // 显示django的response的内容
                     var obj = eval("(" + data + ")")
                     if (obj.result == "ok") {
                         OK();
@@ -53,6 +54,12 @@
                     else {
                         alert("提交失败，请重试");
                     }
+                }
+                ,
+                error: function () {
+
+                    alert('提交失败，程序错误，请联系管理员处理');
+
                 }
             });
 
@@ -69,7 +76,7 @@
 <form id="Form1" method='POST' runat="server" role="form">
     {% csrf_token %}
     <input type="hidden" id="hdID" value="{{ mid }}" />
-    <input type="hidden" id="acton" value="modify" />
+    <input type="hidden" id="action" name="action" value="detail" />
     <div style="width: 90%; margin: 0 auto;">
          <div class="form-group">
         {{ mailemessage_form }}

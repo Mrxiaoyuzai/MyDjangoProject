@@ -98,7 +98,8 @@ STATICFILES_DIRS = (os.path.join(PROJECT_DIR,'static/'),)
 if os.environ.get('SERVER_SOFTWARE', None):
     from .uat_settings import *
 else:
-    from .dev_settings import *
+    from .uat_settings import *
+    #from .dev_settings import *
 
 
 

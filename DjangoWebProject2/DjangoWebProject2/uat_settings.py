@@ -5,7 +5,7 @@
 DATABASES = {
    'default': {      
          'ENGINE': 'sql_server.pyodbc', #数据库引擎设置
-         'NAME': 'django',#要连接的数据库名
+         'NAME': 'OverDueRemind',#要连接的数据库名
        
          'USER': 'sa', #数据库用户名
        

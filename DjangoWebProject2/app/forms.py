@@ -10,13 +10,7 @@ from app.models import MailMessage
 from django.forms import widgets as Fwidgets
 from django.forms import fields as Ffields
 
-TYPE_CHOICES = (('', '--请选择--'),
-    ('联动价格更新', '联动价格更新'),
-    ('合同到期', '合同到期'),
-    ('返利到期追踪', '返利到期追踪'),
-    ('设备分期付款', '设备分期付款'),
-    ('国产化进度更新', '国产化进度更新'),
-    ('日常项目更新', '日常项目更新'),)
+
 
 class BootstrapAuthenticationForm(AuthenticationForm):
     """Authentication form which uses boostrap CSS."""
@@ -28,15 +22,15 @@ class BootstrapAuthenticationForm(AuthenticationForm):
                                widget=forms.PasswordInput({
                                    'class': 'form-control',
                                    'placeholder':'Password'}))
+ 
 
-
-class MailMessageForm(ModelForm):
+class MailMessageForm(ModelForm):    
     class Meta:
         model = MailMessage  # 根据 Author 模型创建表单
         #fields = "__all__"
         widgets = {
-            'type': Fwidgets.Select(attrs={'class': 'form-control'},choices=TYPE_CHOICES),
-            'usertitle':Fwidgets.Select(attrs={'class': 'form-control'},choices=TYPE_CHOICES),
+            'type': Fwidgets.Select(attrs={'class': 'form-control'}),
+            'username':Fwidgets.Select(attrs={'class': 'form-control'}),
             'title': Fwidgets.TextInput(attrs={'class': 'form-control'}),
             'supplier': Fwidgets.TextInput(attrs={'class': 'form-control'}),
             'message': Fwidgets.Textarea(attrs={'class': 'form-control'}),
@@ -53,4 +47,8 @@ class MailMessageForm(ModelForm):
               #'enddate': Ffields.DateField,
                 #'sendtime': Ffields.DateField,
         }
-        fields = ['type','usertitle', 'title', 'supplier', 'message','message','startdate', 'enddate','sendtime','remark']  # 该表单包含的字段
+        fields = ['type','username', 'title', 'supplier', 'message','message','startdate', 'enddate','sendtime','remark']  # 该表单包含的字段
+    username = forms.ChoiceField(label=u'负责人',widget=Fwidgets.Select(attrs={'class': 'form-control'}))
+    def __init__(self,*args,**kwargs):
+        super(MailMessageForm,self).__init__(*args,**kwargs)
+        self.fields['username'].choices = (('112', '--请选择--'),)

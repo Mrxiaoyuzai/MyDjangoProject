@@ -4,7 +4,6 @@ Command-line utility for administrative tasks.
 """
 
 import os
-import django
 import sys
 
 if __name__ == "__main__":

@@ -49,7 +49,7 @@
     <Compile Include="DjangoWebProject2\settings.py" />
     <Compile Include="DjangoWebProject2\urls.py" />
     <Compile Include="DjangoWebProject2\wsgi.py" />
-    <Compile Include="MyTest.py">
+    <Compile Include="app\WSHelper.py">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
