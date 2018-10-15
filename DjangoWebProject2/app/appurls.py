@@ -15,7 +15,7 @@ import app.views
 # admin.autodiscover()
 
 urlpatterns = [# Examples:
-    url(r'^$', app.views.messageDetail, name='/'),   
+    url(r'^$', app.views.list, name='/'),   
     url(r'^home$', app.views.home, name='home'),
     url(r'^contact$', app.views.contact, name='contact'),
     url(r'^about', app.views.about, name='about'),

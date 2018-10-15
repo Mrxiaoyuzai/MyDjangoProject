@@ -4,14 +4,14 @@
 <base target="_self" />
 <script type="text/javascript">
     function OK() {
-        if (window.opener != undefined) {
+        /*if (window.opener != undefined) {
             //for chrome
             opener.RefreshList(11);
             window.opener.returnValue = 11;
         }
         else {
             window.returnValue = 22;
-        }
+        }*/
 
         window.close();
     }
@@ -36,15 +36,15 @@
     }
 
     $().ready(function () {
-      
+
 
         $("#Form1").submit(function (e) {
 
             var url = window.location.href;
             $.ajax({
-                dataType: "text",                
+                dataType: "text",
                 type: "get",
-                url: "doAction", 
+                url: "doAction",
                 data: $("#Form1").serialize(), // serializes the form's elements.
                 // 如果表单提交成功
                 success: function (data) {
@@ -71,13 +71,33 @@
     })
 
 </script>
+
+<script>
+
+    $().ready(function () {
+        $('.form_datetime').datetimepicker({
+            weekStart: 0, //一周从哪一天开始
+            minView: 2,
+            language: 'zh-CN',
+            bootcssVer: 3,
+            pickerPosition: "bottom-left",
+            todayBtn: 1, //
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            forceParse: 0,
+            showMeridian: 1,
+            format:'yyyy-mm-dd'
+        });
+    })
+</script>
 {% endblock %}
 
 {% block content %}
 
 <form id="Form1" method='POST' runat="server" role="form">
     {% csrf_token %}
-    <input type="hidden" id="hdID" value="{{ mid }}" />
+    <input type="hidden" id="hdID" name="hdID" value="{{ mid }}" />
     <input type="hidden" id="action" name="action" value="detail" />
     <div style="width: 90%; margin: 0 auto;">
          <div class="form-group">

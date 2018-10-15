@@ -132,7 +132,7 @@
             url = "messagedetail?m=" + Math.random();
 
         }
-        var sReturn = window.showModalDialog(url, window, "dialogHeight:350px;dialogWidth:650px;status:no; help:no;scroll:auto;center:yes;");
+        var sReturn = window.showModalDialog(url, window, "dialogHeight:500px;dialogWidth:750px;status:no; help:no;scroll:auto;center:yes;");
         search();
     }
     var DelTeamInfo = function () {
@@ -140,9 +140,9 @@
         if (a.length <= 0) {
             alert("请选中一行")
         } else {
-            var requestids = "";
+            var requestids = "-1";
             $.each(a, function (n, value) {
-                requestids += value.pk + "|";
+                requestids += "|" + value.pk;
             });
             if (confirm("是否删除选中的数据?")) {
                 $.ajax({

@@ -18,9 +18,10 @@ import base64
 from Crypto.Cipher import AES
 
 from app.WSHelper import *
+from django.db.models import Q
 
 def getCurrentUserName(request):
-    username = request.COOKIES.get('PersonalGuid',None)
+    username = request.COOKIES.get('TmpGuid',None)
     if username:
         aes = getAESHelper()  # 初始化加密器
         text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(username, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))
@@ -28,7 +29,7 @@ def getCurrentUserName(request):
     return None
 def getCurrentUser(request):
     currentUser = None
-    username = request.COOKIES.get('PersonalGuid',None)
+    username = request.COOKIES.get('TmpGuid',None)
     if username:
         aes = getAESHelper()  # 初始化加密器
         text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(username, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))
@@ -36,7 +37,7 @@ def getCurrentUser(request):
     return currentUser
 def getChildrenUser(request):
     childList = None
-    username = request.COOKIES.get('PersonalGuid',None)
+    username = request.COOKIES.get('TmpGuid',None)
     if username:
         aes = getAESHelper()  # 初始化加密器
         text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(username, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))
@@ -76,7 +77,7 @@ def setUserCookie(request):
         '''
         text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(retPrm, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))  # 解密 多加一个 rstrip(b'\1') 因为C#加密多一个，原因未知
         response = HttpResponseRedirect('http://' + request.get_host() + request.path)
-        response.set_cookie('PersonalGuid','bbb' + retPrm)  ###为浏览器回写cookie！！key为username 对应的value为xxx。
+        response.set_cookie('TmpGuid', retPrm)  ###为浏览器回写cookie！！key为username 对应的value为xxx。
         return response
     else:
         myurl = 'http://' + request.get_host() + request.path + '&IsFromPython=1'
@@ -86,7 +87,7 @@ def setUserCookie(request):
     #return
     #HttpResponseRedirect('http://webapps.linde-xiamen.com.cn/VerifyIdentity2Java/SkipPage.aspx?myurl=http://127.0.0.1:8000/list')
 def checkIsLogin(request):   
-    username = request.COOKIES.get('PersonalGuid',None) #request.session.get('username',None)
+    username = request.COOKIES.get('TmpGuid',None) #request.session.get('username',None)
     #print(username)
     if username:        
         return True
@@ -100,10 +101,10 @@ def doAction(request):
         if action == "getList":
             offset = request.GET.get("offset",1)
             limit = request.GET.get("limit",10)
-            #message_list =
+           
             #models.MailMessage.objects.all().order_by("-createtime")
-
-            message_list = models.MailMessage.objects.filter(creator__icontains="system").order_by("-createtime")
+            un = getCurrentUserName(request)
+            message_list = models.MailMessage.objects.filter(Q(creator__icontains=un) | Q(username__icontains = un)).order_by("-createtime")
             
             message_list_json = serializers.serialize("json", message_list)
             
@@ -125,23 +126,22 @@ def doAction(request):
             return HttpResponse((message_list_json))
         elif action == "delInfo":
             ids = request.GET.get("checkedRequestID").split('|')
-            ids = filter(None, ids)
-            mmodel = models.MailMessage.objects.get(id__in=ids).delete()
+            #ids = filter(None, ids)
+            mmodel = models.MailMessage.objects.filter(id__in=ids).delete()
             return HttpResponse(json.dumps({"result":"ok"}))
         elif action == "detail":
-            mid = int(request.POST.get("id",0))
+            mid = int(request.GET.get("hdID",0))
             mmodel = None   
             if(mid > 0):
-                mmodel = models.MailMessage.objects.get(id=mid)
-            abc = request.GET.get('title',None)
+                mmodel = models.MailMessage.objects.get(id=mid)            
             obj = forms.MailMessageForm(request.GET,instance = mmodel)
             obj.fields['username'].choices = getChildrenUser(request)
             if  obj.is_valid():
                 current_time = datetime.now()
                 temp = obj.save(commit=False) #commit暂时获取一个数据库对象，对其他字段进行赋值
-                uinfo=getUserInfo(temp.username)[0][0]
-                temp.usertitle=uinfo.FullName
-                temp.useremail=uinfo.Email
+                uinfo = getUserInfo(temp.username)[0][0]
+                temp.usertitle = uinfo.FullName
+                temp.useremail = uinfo.Email
                 if(mid == 0):
                     temp.createtime = current_time
                     temp.creator = getCurrentUserName(request)
@@ -167,7 +167,8 @@ def doAction(request):
 
 def home(request):
     """Renders the home page."""
-    assert isinstance(request, HttpRequest)    
+    assert isinstance(request, HttpRequest) 
+    #handleMessageMail()
     return render(request,
         'app/index.html',
         {
@@ -206,6 +207,7 @@ def messageDetail(request):
     obj.fields['username'].choices = getChildrenUser(request)
     #obj.fields['username'].choices = (('321', '--312--'),)
     context['mailemessage_form'] = obj
+    context['mid'] = mid
     return render(request,'app/MessageDetail.html',context)
    
 

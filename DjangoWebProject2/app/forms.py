@@ -35,12 +35,13 @@ class MailMessageForm(ModelForm):
             'supplier': Fwidgets.TextInput(attrs={'class': 'form-control'}),
             'message': Fwidgets.Textarea(attrs={'class': 'form-control'}),
             'message': Fwidgets.TextInput(attrs={'class': 'form-control'}),
-            'startdate': Fwidgets.TextInput(attrs={'class': 'form-control'}),
-            'enddate': Fwidgets.TextInput(attrs={'class': 'form-control'}),
-            'sendtime': Fwidgets.TextInput(attrs={'class': 'form-control'}),
+            'startdate': Fwidgets.TextInput(attrs={'class': 'form-control form_datetime'}),
+            'enddate': Fwidgets.TextInput(attrs={'class': 'form-control form_datetime'}),
+            'sendtime': Fwidgets.TextInput(attrs={'class': 'form-control form_datetime'}),
             'remark': Fwidgets.Textarea(attrs={'class': 'form-control'}),  
             'useremail':Fwidgets.HiddenInput(),
             'usertitle':Fwidgets.HiddenInput(),
+
             #'username':Fwidgets.HiddenInput(),
         }
         field_classes = {  # 定义字段的类是什么
