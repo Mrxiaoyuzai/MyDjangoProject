@@ -97,7 +97,10 @@ def checkIsLogin(request):
 def doAction(request):
     if request.method == "GET":
         #print("it's a test") #用于测试
-        action = request.GET.get('action') 
+        action = request.GET.get('action')
+        if action == "handleSendingTask":
+            handleMessageMail()
+            return HttpResponse(json.dumps({"result":"ok"}))
         if action == "getList":
             offset = request.GET.get("offset",1)
             limit = request.GET.get("limit",10)

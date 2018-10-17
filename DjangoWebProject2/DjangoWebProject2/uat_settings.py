@@ -2,7 +2,9 @@
 #'ENGINE': 'django.db.backends.sqlite3',
  #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {
+
+
+DATABASES111 = {
    'default': {      
          'ENGINE': 'sql_server.pyodbc', #数据库引擎设置
          'NAME': 'OverDueRemind',#要连接的数据库名

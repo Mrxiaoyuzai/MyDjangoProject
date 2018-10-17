@@ -23,14 +23,14 @@ class MailMessage(models.Model):
     usertitle = models.CharField(max_length=500,verbose_name="负责人名称",null=True, blank=True)
     useremail = models.CharField(max_length=1000,verbose_name="用户Email",null=True, blank=True)
     remark = models.CharField(max_length=4000,verbose_name="备注",null=True, blank=True)      
-    startdate = models.DateTimeField(verbose_name="项目开始日期")
-    enddate = models.DateTimeField(verbose_name="项目结束日期")
-    sendtime = models.DateTimeField(verbose_name="提醒日期")
+    startdate = models.DateField(verbose_name="项目开始日期")
+    enddate = models.DateField(verbose_name="项目结束日期")
+    sendtime = models.DateField(verbose_name="提醒日期")
     creator = models.CharField(max_length=500,verbose_name="创建人")
     createtime = models.DateTimeField()
     
 class MailLog(models.Model):
     #发送日志
     mid = models.IntegerField(verbose_name="信息表序列号")
-    title = models.CharField(max_length=500,verbose_name="项目描述")
+    result = models.TextField(verbose_name="结果",null=True,blank=True)
     createtime = models.DateTimeField()

@@ -39,7 +39,6 @@
 
 
         $("#Form1").submit(function (e) {
-
             var url = window.location.href;
             $.ajax({
                 dataType: "text",
@@ -47,6 +46,11 @@
                 url: "doAction",
                 data: $("#Form1").serialize(), // serializes the form's elements.
                 // 如果表单提交成功
+                beforeSend: function () {
+                    $("#btnSubmit").val("提交中...");
+                    $("#btnSubmit").attr("disabled", "disabled");
+                }
+                ,
                 success: function (data) {
                     //alert(data); // 显示django的response的内容
                     var obj = eval("(" + data + ")")
@@ -59,9 +63,13 @@
                 }
                 ,
                 error: function () {
-
                     alert('提交失败，程序错误，请联系管理员处理');
 
+                }
+                ,
+                complete: function () {
+                    $("#btnSubmit").val("确认");
+                    $("#btnSubmit").removeAttr("disabled", "disabled");
                 }
             });
 
@@ -87,7 +95,7 @@
             startView: 2,
             forceParse: 0,
             showMeridian: 1,
-            format:'yyyy-mm-dd'
+            format: 'yyyy-mm-dd'
         });
     })
 </script>
@@ -105,7 +113,7 @@
           </div>
 
          <div class="btn-group" style="display: table; width: auto; margin-left: auto; margin-right: auto;">
-            <input type="submit" value="确认" class="btn btn-primary" />
+            <input type="submit" id="btnSubmit" value="确认" class="btn btn-primary" />
         </div>
     </div>
     <!--

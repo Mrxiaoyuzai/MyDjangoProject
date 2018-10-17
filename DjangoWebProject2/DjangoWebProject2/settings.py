@@ -95,6 +95,13 @@ STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 PROJECT_DIR=os.path.dirname(__file__)
 STATICFILES_DIRS = (os.path.join(PROJECT_DIR,'static/'),)
 
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
 if os.environ.get('SERVER_SOFTWARE', None):
     from .uat_settings import *
 else:
