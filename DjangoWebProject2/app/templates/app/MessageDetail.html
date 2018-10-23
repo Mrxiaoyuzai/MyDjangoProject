@@ -97,6 +97,17 @@
             showMeridian: 1,
             format: 'yyyy-mm-dd'
         });
+        $("input[id$=startdate]").on("click", function () {
+            $("input[id$=startdate]").datetimepicker("setEndDate", $("input[id$=enddate]").val())
+        });
+        $("input[id$=enddate]").on("click", function () {
+            $("input[id$=enddate]").datetimepicker("setStartDate", $("input[id$=startdate]").val())
+        });
+        $("input[id$=sendtime]").on("click", function () {
+            $("input[id$=sendtime]").datetimepicker("setStartDate", $("input[id$=startdate]").val())
+            $("input[id$=sendtime]").datetimepicker("setEndDate", $("input[id$=enddate]").val())
+        });
+
     })
 </script>
 {% endblock %}

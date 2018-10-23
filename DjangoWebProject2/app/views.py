@@ -1,4 +1,4 @@
-"""
+﻿"""
 Definition of views.
 """
 
@@ -14,17 +14,26 @@ from django.core import serializers
 import time
 from django.http import HttpResponseRedirect
 
-import base64
-from Crypto.Cipher import AES
+
 
 from app.WSHelper import *
 from django.db.models import Q
 
+
+encoder = cxlEncoder('ae125efkk4454eef')
+def writeLog(str):
+    try:
+        f = open('log/log.txt', 'a+') # 若是'wb'就表示写二进制文件
+        f.writelines(str + '\n')
+    except:
+         f.writelines('Write to log error\n')
+    finally:
+        f.close()
+
 def getCurrentUserName(request):
     username = request.COOKIES.get('TmpGuid',None)
-    if username:
-        aes = getAESHelper()  # 初始化加密器
-        text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(username, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))
+    if username:        
+        text_decrypted = encoder.decrypt(username) 
         return text_decrypted
     return None
 def getCurrentUser(request):
@@ -32,50 +41,43 @@ def getCurrentUser(request):
     username = request.COOKIES.get('TmpGuid',None)
     if username:
         aes = getAESHelper()  # 初始化加密器
-        text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(username, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))
+        text_decrypted = encoder.decrypt(username)  
         currentUser = getUserInfo(text_decrypted)
     return currentUser
 def getChildrenUser(request):
     childList = None
-    username = request.COOKIES.get('TmpGuid',None)
-    if username:
-        aes = getAESHelper()  # 初始化加密器
-        text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(username, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))
-        currentUser = getUserInfo(text_decrypted)
-        currentUserEntity = currentUser[0][0]
-        if currentUserEntity.IsManagementPosition == 1:
-            childList = getChildrenUserInfo(currentUserEntity.ADAccount)
-        else:
-            childList = currentUser[0]
-    if(childList):       
-        r = [('', '--请选择--')]
-        for obj in childList:
-           r = r + [(obj.ADAccount, obj.FullName)]
-        return r
+    try:
+        username = request.COOKIES.get('TmpGuid',None)
+        #username = 'jz92Rz6iqqplcKua72rJ4g=='
+        writeLog('CurrentUserEncrpted:' + username)
+        if username:          
+            text_decrypted = encoder.decrypt(username) 
+            writeLog('CurrentUser:' + text_decrypted)
+            currentUser = getUserInfo(text_decrypted)
+            writeLog('CurrentUser:' + str(currentUser))
+            currentUserEntity = currentUser[0][0]
+            if currentUserEntity.IsManagementPosition == 1:
+                childList = getChildrenUserInfo(currentUserEntity.Initial)[0]
+            else:
+                childList = currentUser[0]
+        if(childList):       
+            r = [('', '--请选择--')]
+            for obj in childList:
+               r = r + [(obj.ADAccount, obj.FullName)]
+            return r
+    except Exception as e:
+        writeLog(repr(e))
     #return (('test1','test11'),('test2','test22'))
     return childList
 
-# str不是16的倍数那就补足为16的倍数
-def add_to_16(text):
-    while len(text) % 16 != 0:
-        text += '\0'
-    return str.encode(text)  # 返回bytes
-def getAESHelper():
-    key = 'ae125efkk4454eef'  # 密码
-    aes = AES.new(add_to_16(key), AES.MODE_ECB)  # 初始化加密器
-    return aes
+
 def setUserCookie(request):  
     retPrm = request.GET.get('jalsdj')
     #retPrm='hI5PZ2JQC/ct+gJcnPFAzA=='
     if retPrm: #如果获取到域账号
-        retPrm = retPrm.replace(' ','+')
-       
-        aes = getAESHelper()  # 初始化加密器
-        '''
-        encrypted_text = str(base64.encodebytes(aes.encrypt(add_to_16('MASTDOM\cn4062d'))), encoding='utf8').replace('\n', '')  # 加密
-        text_decrypted111 = str(aes.decrypt(base64.decodebytes(bytes(encrypted_text, encoding='utf8'))).rstrip(b'\0').decode("utf8"))  # 解密
-        '''
-        text_decrypted = str(aes.decrypt(base64.decodebytes(bytes(retPrm, encoding='utf8'))).rstrip(b'\0').rstrip(b'\1').decode("utf8"))  # 解密 多加一个 rstrip(b'\1') 因为C#加密多一个，原因未知
+        retPrm = retPrm.replace(' ','+')     
+
+        text_decrypted =  encoder.decrypt(retPrm) 
         response = HttpResponseRedirect('http://' + request.get_host() + request.path)
         response.set_cookie('TmpGuid', retPrm)  ###为浏览器回写cookie！！key为username 对应的value为xxx。
         return response
@@ -99,7 +101,7 @@ def doAction(request):
         #print("it's a test") #用于测试
         action = request.GET.get('action')
         if action == "handleSendingTask":
-            handleMessageMail()
+            handleMessageMail('http://' + request.get_host() + request.path.replace('doAction','list'))#获取调用url 替换doAction 为list
             return HttpResponse(json.dumps({"result":"ok"}))
         if action == "getList":
             offset = request.GET.get("offset",1)
@@ -179,17 +181,29 @@ def home(request):
             'year':datetime.now().year,
         })
 
-
 def list(request):
     """Renders the home page."""
     #print("StartList")
     assert isinstance(request, HttpRequest)
     if not checkIsLogin(request):
        return setUserCookie(request)
+    tmp = request.GET.get('tmp') 
+   
+
+  
+    pc = PrpCrypt('ae125efkk4454eef')      #初始化密钥
+    e = pc.encrypt("MASTDOM\cn40F7")
+    d = pc.decrypt(e)     
+
+
+
+    encoder = cxlEncoder('ae125efkk4454eef')
+    tt = encoder.encrypt('MASTDOM\cn40F7')
+    t2 = encoder.decrypt('jz92Rz6iqqplcKua72rJ4g==')
     return render(request,
         'app/list.html',
         {
-            'title':'list',
+            'title':'合同到期提醒',
             'year':datetime.now().year,
         })
 
@@ -205,9 +219,11 @@ def messageDetail(request):
     mmodel = None  
     if mid > 0:
         mmodel = models.MailMessage.objects.get(id=mid)
-    obj = forms.MailMessageForm(instance = mmodel)     
-   
+
+
+    obj = forms.MailMessageForm(instance = mmodel)       
     obj.fields['username'].choices = getChildrenUser(request)
+
     #obj.fields['username'].choices = (('321', '--312--'),)
     context['mailemessage_form'] = obj
     context['mid'] = mid

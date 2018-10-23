@@ -26,7 +26,6 @@ import posixpath
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -36,7 +35,7 @@ SECRET_KEY = '78a6f9e6-0fde-45b2-a71b-008c7cf4b46f'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -92,7 +91,7 @@ STATIC_URL = '/OverDueRemind/static/'
 #STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 
-PROJECT_DIR=os.path.dirname(__file__)
+PROJECT_DIR = os.path.dirname(__file__)
 STATICFILES_DIRS = (os.path.join(PROJECT_DIR,'static/'),)
 
 
@@ -108,6 +107,12 @@ else:
     from .uat_settings import *
     #from .dev_settings import *
 
+
+# 创建日志文件夹路径
+LOG_PATH = os.path.join(BASE_DIR, 'log')
+# 如过地址不存在，则自动创建log文件夹
+if not os.path.isdir(LOG_PATH):
+    os.mkdir(LOG_PATH)
 
 
 
